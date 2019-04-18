@@ -3,7 +3,9 @@ exports.up = pgm => {
   pgm.sql(`
     CREATE TABLE "bazaar"."users" (
       "id" SERIAL PRIMARY KEY,
-      "fullname" TEXT NOT NULL
+      "fullname" TEXT,
+      "password" TEXT NOT NULL,
+      "email" TEXT NOT NULL
     );
   `),
   

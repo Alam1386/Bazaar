@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "db:up": "yarn node-pg-migrate up --create-schema", 
+    "db:up": "yarn node-pg-migrate up --create-schema",
+    "db:drop": "psql -U alamtalash -d postgres -c \" DROP SCHEMA IF EXISTS \\\"bazaar\\\" CASCADE \"",
+    "db:reset": "yarn db:drop && yarn db:up",
+    "db:seed": "node seeds/index.js",
+    "db:resetandseed": "yarn db:reset && yarn db:seed",
     "test": "jest",
     "start": "node index.js",
     "start:dev": "nodemon index.js"
@@ -21,7 +25,6 @@
     "squel": "^5.12.2"
   },
   "devDependencies": {
-    "jest": "^24.1.0",
-    "nodemon": "^1.18.10"
+    "jest": "^24.1.0"
   }
 }
