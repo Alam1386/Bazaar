@@ -11,8 +11,8 @@ const emergencysignup = require('./signup')  /* <-- Use Me for emergencies */
 
 module.exports = {
   Mutation: {
-    async signUp( parent, input, { req, app, postgres }){
-      //console.log('show me input ', input);
+    async signUp( parent, {input}, { req, app, postgres }){
+      console.log('show me input ', input);
       let email = input.email.toLowerCase();
       let hashedpassword = await bcrypt.hash(input.password, saltRounds)
       const newUserInsert = {

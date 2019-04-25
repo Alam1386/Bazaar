@@ -39,19 +39,7 @@ module.exports = gql`
     #TODO 
   }
   type Mutation {
-    signUp(
-      first_name: String,
-      last_name: String,
-      email: String!,
-      user_name: String,
-      password: String!,
-      status: String,
-      country: String,
-      date_created: Date,
-      age: Int,
-      gender: String,
-      rating: Int
-    ): signupResponse!,
+    signUp(input: signupInput!): signupResponse!,
 
     login( email: String!, password: String!): loginResponse!,
     addItem(
@@ -70,6 +58,20 @@ module.exports = gql`
 
     removeItem(item_id: ID!): removeItemResponse!,
     updateItem(item_id: ID!, item_name: String, price: Float, item_description: String, condition: String): Item!
+  }
+
+  input signupInput {
+    first_name: String,
+    last_name: String,
+    email: String!,
+    user_name: String,
+    password: String!,
+    status: String,
+    country: String,
+    date_created: Date,
+    age: Int,
+    gender: String,
+    rating: Int
   }
   
   type removeItemResponse {
