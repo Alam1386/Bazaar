@@ -26,17 +26,18 @@ module.exports = {
         message: 'sucess'
       }
     },
-    async login ( parent, input, {req, app, postgres}){
-      //console.log('The input is', input);
+    async login ( parent, {input}, {req, app, postgres}){
+      //  input = { input: { email: 'sfsdfsdf@one.ocm', password: 'sdfsdfsd' } }
       const getPassword = {
         text: "SELECT  password FROM bazaar.users  where email = $1",
         values: [input.email]
       }
       //console.log(getPassword)
       let matchPassword = await postgres.query(getPassword);
-      //console.log(matchPassword)
-      const abc = matchPassword.rows[0].password;
-      let comparePassword = await bcrypt.compare (input.password, abc)
+      console.log('Input', input)
+      console.log(matchPassword)
+      const pass = matchPassword.rows[0].password;
+      let comparePassword = await bcrypt.compare (input.password, pass)
         if(comparePassword === true){
           return{
             message: 'You are logged in!'

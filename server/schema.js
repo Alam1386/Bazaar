@@ -41,7 +41,8 @@ module.exports = gql`
   type Mutation {
     signUp(input: signupInput!): signupResponse!,
 
-    login( email: String!, password: String!): loginResponse!,
+    login( input: loginInput!): loginResponse!,
+    
     addItem(
       name: String,
       type: String,
@@ -73,7 +74,10 @@ module.exports = gql`
     gender: String,
     rating: Int
   }
-  
+  input loginInput {
+    email: String!,
+    password: String!
+  }
   type removeItemResponse {
     message: String
   }

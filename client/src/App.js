@@ -6,7 +6,7 @@ import apolloClient from './apolloclient'
 import signUp from './components/Signup'
 import Index from './components/Index'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-
+import Login from './components/Login'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -72,17 +72,26 @@ function App(props) {
                 );
               }}
             </WithState>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            Bazaar Market Place
-          </Typography>
-          <Link to="/signup" color="inherit" >Signup </Link>
-          <Button to="/signup" color="inherit">Login</Button>
+              <Typography variant="h6" color="inherit" className={classes.grow}>
+              <Link to='/' className='navbar-link'>
+                BAZAAR
+              
+              </Link>
+              </Typography>
+
+          <Link to='/signup/' className='navbar-link'>
+            <Button to="/signup" color="inherit">Signup </Button>
+          </Link>
+
+          <Link to='/login/' className='navbar-link'>
+            <Button to="/Login" color="inherit" >Login </Button>
+          </Link>
         </Toolbar>
         </AppBar>
           
           <Route path="/" exact component={Index} />
-          <Route path="/Signup"  component={signUp} />
-          
+          <Route path="/signup"  component={signUp} />
+          <Route path="/login"  component={Login} />
         </Router>
       </ApolloProvider>
   )   
