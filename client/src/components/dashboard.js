@@ -46,20 +46,20 @@ const styles = theme => ({
   },
 })
 
-const Index = props => {
+const dashbaord = props => {
   const { classes } = props;
   return(
       <main className = {classes.main}> 
       <Paper className={classes.paper}>
         <div className = "container">
-          <p className ="title"> BAZAAR </p>
-          <img src = {Bazaar} className ="img"/>
+          <p className ="title"> Bazaar Dashbaord </p>
+          
           <form className = {classes.form}>
-              <Link to='/Signup/'>
-                <p className="btn">Sign Up </p>
+              <Link to='/addItem/'>
+                <p className="btn">Add item </p>
             </Link>
             <Link to='/login'>
-              <p className = "btn">Log In </p>
+              <p className = "btn">Log Out </p>
             </Link>
           </form>
         </div>
@@ -68,8 +68,8 @@ const Index = props => {
     )
   };
 
-Index.propType = {
+dashbaord.propType = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(Index)
+export default withStyles(styles)(dashbaord)

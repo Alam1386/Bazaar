@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 
 /* =========================== Matial Ui Styles ==================== */
+const imgUrl = '../../public/image.jpg';
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -41,48 +42,43 @@ const styles = theme => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
+    backgroundImage: 'url(' + imgUrl + ')',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
 });
-
 /* =========================== Mutation code stats from here ==================== */
 
-const LOGIN_MUTATION = gql` 
-    mutation LoginMutation ($input: loginInput!){
-        login( input: $input ){
+const SIGN_UP_MUTATION = gql` 
+    mutation addItemMutation ($input: addItemInput!){
+        addItem( input: $input ){
             message
         }
     }
 `
-const Login = props => {
+const addItem = props => {
   const { classes } = props;
     return(
       <Mutation
-        mutation = {LOGIN_MUTATION}
+        mutation = {SIGN_UP_MUTATION}
         onError = {(error) =>{
             console.log(error)
         }}
         onCompleted = {data => {
             console.log("Data is: ", data)
-            console.log('The message is : ', data.login.message)
-            if(data.login.message === 'You are not logged in!'){
-                props.history.push("/login")
-                alert ('You are not logged in!')
-            }else{
-                props.history.push("/dashboard")
-                alert ('You are logged in!')
-            }
-            
+            props.history.push("/dashboard")
+            alert ("We are signed up!")
         }}
       >
-        {(Login, {data}) =>(
+        {(addItem, {data}) =>(
           <Formik
-          initialValues={{email: '',  password: ''}}
+          initialValues={{first_name: '',  last_name: '',   email: '',  user_name: '',  password: '',  status: '',  country: '',  date_created: '', age: '', gender: '', rating: ''}}
           onSubmit={(values, { setSubmitting }) => {
-              console.log('Values', values)
-              Login({variables: {input: values}})
+              addItem({variables: {input: values}})
           }}
           validationSchema={Yup.object().shape({
               email: Yup.string()
@@ -112,11 +108,33 @@ const Login = props => {
                     <LockOutlinedIcon />
                   </Avatar>
                   <Typography component="h1" variant="h5">
-                    LOGIN
+                    SIGN UP
                   </Typography>
               <form onSubmit={handleSubmit} className={classes.form} noValidate autoComplete="off" >
               {/* const { classes } = this.props; */}
               <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    id="standard-helperText"
+                    name = "first_name"
+                    label="First name"
+                    margin="normal"
+                    type="text"
+                    value={values.first_name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    name = "last_name"
+                    label="Last name"
+                    margin="normal"
+                    type="text"
+                    value={values.last_name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    variant="outlined"
+                  />
                   <TextField
                     id="outline-required"
                     label="Email address*"
@@ -124,6 +142,17 @@ const Login = props => {
                     type="text"
                     name="email"
                     value = {values.email}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    label="User name"
+                    margin="normal"
+                    type="text"
+                    name="user_name"
+                    value = {values.user_name}
                     onChange = {handleChange}
                     onBlur = {handleBlur}
                     variant="outlined"
@@ -139,15 +168,81 @@ const Login = props => {
                     onBlur = {handleBlur}
                     variant="outlined"
                   />
+                  <TextField
+                    id="standard-helperText"
+                    label="Status"
+                    margin="normal"
+                    type="text"
+                    name="status"
+                    value = {values.status}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    label="Country"
+                    margin="normal"
+                    type="text"
+                    name="country"
+                    value = {values.country}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    label="Date created"
+                    margin="normal"
+                    type="text"
+                    name="date_created"
+                    value = {values.date_created}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    label="Age "
+                    margin="normal"
+                    type="number"
+                    name="age"
+                    value = {values.age}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    label="Gender"
+                    margin="normal"
+                    type="text"
+                    name="gender"
+                    value = {values.gender}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="standard-helperText"
+                    label="Rating"
+                    margin="normal"
+                    type="number"
+                    name="rating"
+                    value = {values.rating}
+                    onChange = {handleChange}
+                    onBlur = {handleBlur}
+                    variant="outlined"
+                  />
                   {errors.email &&
                   touched.email && <div className="input-feedback">{errors.email}</div>}
                   <Button 
                     type="submit"
                     fullWidth
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     className={classes.submit} disabled={isSubmitting}>
-                    Login
+                    Register
                   </Button>
                 </FormControl>
               </form>
@@ -161,8 +256,8 @@ const Login = props => {
   )
   };
   
-Login.propType = {
+addItem.propType = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(Login)
+export default withStyles(styles)(addItem)

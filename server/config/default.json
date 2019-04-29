@@ -1,10 +1,10 @@
 {
   "db": {
-    "user": "alamtalash",
-    "password": "",
-    "host": "localhost",
+    "user": "bazaar_user",
+    "password": "bazaarpassword",
+    "host": "bazaardb.ctelejehikjp.us-east-2.rds.amazonaws.com",
     "port": 5432,
-    "database": "postgres",
+    "database": "bazaar_db",
     "schema": "bazaar"
   }
 }

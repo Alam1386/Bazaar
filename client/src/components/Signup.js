@@ -13,8 +13,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
+
 /* =========================== Matial Ui Styles ==================== */
-const imgUrl = '../../public/image.jpg';
+
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -41,10 +42,6 @@ const styles = theme => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
-    backgroundImage: 'url(' + imgUrl + ')',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
   },
   submit: {
     marginTop: theme.spacing.unit * 3,

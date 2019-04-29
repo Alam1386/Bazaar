@@ -32,7 +32,8 @@ module.exports = {
       return user.rows
     },
     async getAllItems(parent, _, {app, req, postgres}, info){
-      authenticate(app, req)
+      const user_id = authenticate(app, req);
+      console.log(" Show me user id authenticates", user_id)
       const gettingAllItems = {
         text: 'SELECT * FROM bazaar.items',
       }

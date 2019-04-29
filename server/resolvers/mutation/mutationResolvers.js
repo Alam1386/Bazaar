@@ -19,8 +19,19 @@ module.exports = {
         text: "INSERT INTO bazaar.users (first_name, last_name, email, user_name, password, status, country, date_created, age, gender, rating) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *", 
         values: [input.first_name, input.last_name, email, input.user_name, hashedpassword, input.status, input.country, input.date_created, input.age, input.gender, input.rating]
       }
-      let insertResult = await postgres.query(newUserInsert);
+      //let insertResult = await postgres.query(newUserInsert);
       //console.log('insert result', insertResult);
+      let insertNewUserResult = await postgres.query(newUserInsert)
+     // console.log('Show new ', insertNewUserResult)
+      let myjwttoken = await jwt.sign({
+        data: insertNewUserResult.rows[0],
+        exp: Math.floor(Date.now() / 1000) + (60 * 60),
+
+      }, 'secret');
+      req.res.cookie('bazaar_app', myjwttoken, {
+        httpOnly: true,
+        secure: process.env.NODe_ENV === 'production'
+      })
       return{
         token: hashedpassword,
         message: 'sucess'

@@ -5,6 +5,8 @@ import gql from 'graphql-tag'
 import apolloClient from './apolloclient'
 import signUp from './components/Signup'
 import Index from './components/Index'
+import addItem from './components/addItem'
+import dashboard from './components/dashboard'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Login from './components/Login'
 import PropTypes from 'prop-types';
@@ -92,6 +94,8 @@ function App(props) {
           <Route path="/" exact component={Index} />
           <Route path="/signup"  component={signUp} />
           <Route path="/login"  component={Login} />
+          <Route path="/addItem"  component={addItem} />
+          <Route path="/dashboard"  component={dashboard} />
         </Router>
       </ApolloProvider>
   )   
